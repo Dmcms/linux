@@ -1,0 +1,28 @@
+语法格式：sed [options] '[commands]' filename
+替换    
+sed 's/a/b/' a.txt                      //s(替换)，将每行首个a替换成b
+sed 's/a/b/g' a.txt                     //g(全局)，将全局a替换成b
+sed 's#a/c#b/d#' a.txt                  //将文件中每行首个a/c替换成b/d  
+数字表示行范围，$表示行尾
+sed '2s/a/b/' a.txt                     //将文件中第2行a替换成b
+sed '2,$/a/b/' a.txt                    //替换第2行到最后一行，多行替换用逗号隔开
+删除
+sed '2,4d' a.txt                        //d(delete删除)，删除2到4行
+sed '/192.168/d' /etc/hosts             //删除带"192.168"的行
+添加行
+echo "hello world" | sed 'i\ksidc'      //i(insert插入)，在每行前面插入一行  i\
+echo "hello world" | sed 'a\ksidc'      //a(append附加)，在每行后面添加一行  a\
+sed '$a\hello' a.txt                    //在最后一行添加内容
+sed '2a\hello' a.txt                    //在第2行后面添加内容
+sed '2,4a\hello' a.txt                  //在第2行到4行后面分别添加内容
+修改行 c (change)
+sed '4c\hello' a.txt                    //将第4行修改为hello
+sed '4,$c\hello' a.txt                   //将第4行以后都修改为hello
+sed '/make/c\hello' a.txt               //有make的行都改为hello
+打印 
+sed -n '2p' a.txt                         //输出第2行内容
+将修改或过滤出来的内容保存到另一个文件中
+sed -n '/make/w b.txt' a.txt               //带make的行保存到b.txt
+修改保存：用于替换或修改服务器配置文件
+sed -i 's/make/hello/' a.txt
+
